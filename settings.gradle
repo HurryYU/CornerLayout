@@ -1,0 +1,3 @@
+include ':cornerlayout'
+include ':app'
+rootProject.name = "CornerLayout"
