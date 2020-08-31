@@ -34,6 +34,16 @@ class CornerLayout @JvmOverloads constructor(
      */
     private var bannerBackgroundColor = DEFAULT_BANNER_BACKGROUND_COLOR
 
+    /**
+     * 最远点占View宽度和高度的百分比
+     */
+    private var bannerPercent = DEFAULT_BANNER_PERCENT
+
+    /**
+     * 边角横幅宽度
+     */
+    private var bannerWidth = DEFAULT_BANNER_WIDTH
+
     init {
         initAttrs(attrs)
 
@@ -56,16 +66,28 @@ class CornerLayout @JvmOverloads constructor(
         }
     }
 
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
+    override fun onDrawForeground(canvas: Canvas) {
+        super.onDrawForeground(canvas)
         drawBanner(canvas)
     }
 
     private fun drawBanner(canvas: Canvas) {
+        val bannerRightWithPercent = (viewWidth * bannerPercent)
+        val bannerBottomWithPercent = (viewHeight * bannerPercent)
+
+        val x1Point = arrayOf(bannerRightWithPercent - bannerWidth, 0F)
+        val x2Point = arrayOf(bannerRightWithPercent, 0F)
+        val y1Point = arrayOf(0F, bannerBottomWithPercent - bannerWidth)
+        val y2Point = arrayOf(0F, bannerBottomWithPercent)
 
         cornerBannerPath.apply {
             reset()
+            moveTo(x1Point[0],x1Point[1])
+            lineTo(y1Point[0],y1Point[1])
+            lineTo(y2Point[0],y2Point[1])
+            lineTo(x2Point[0],x2Point[1])
         }
+        canvas.drawPath(cornerBannerPath, cornerBannerPaint)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -76,5 +98,7 @@ class CornerLayout @JvmOverloads constructor(
 
     companion object {
         private val DEFAULT_BANNER_BACKGROUND_COLOR = Color.parseColor("#FF8080")
+        private const val DEFAULT_BANNER_PERCENT = 0.4F
+        private val DEFAULT_BANNER_WIDTH = 26.dp
     }
 }
