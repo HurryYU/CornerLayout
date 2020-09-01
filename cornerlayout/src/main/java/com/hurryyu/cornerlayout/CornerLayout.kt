@@ -7,6 +7,8 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 /**
  * @author HurryYu
@@ -21,13 +23,33 @@ class CornerLayout @JvmOverloads constructor(
     /**
      * 边角横幅画笔
      */
-    private val cornerBannerPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val bannerPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-    private val cornerBannerPath:Path = Path()
+    /**
+     * 横幅文字画笔
+     */
+    private val bannerTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+    /**
+     * 横幅Path
+     */
+    private val bannerPath: Path = Path()
 
     private var viewWidth = 0
 
     private var viewHeight = 0
+
+    // TODO: 2020/9/1 demo str final will delete
+    var bannerText = "HurryYu007"
+        set(value) {
+            field = value
+            realDrawBannerText = value
+        }
+
+    /**
+     * 真正绘制的文字,如果bannerText过长,可能会被裁剪
+     */
+    private var realDrawBannerText = bannerText
 
     /**
      * 边角横幅背景颜色
@@ -35,21 +57,38 @@ class CornerLayout @JvmOverloads constructor(
     private var bannerBackgroundColor = DEFAULT_BANNER_BACKGROUND_COLOR
 
     /**
-     * 最远点占View宽度和高度的百分比
+     * 最远点距离View(0,0)点距离
      */
-    private var bannerPercent = DEFAULT_BANNER_PERCENT
+    private var bannerDistanceOriginPointLength = DEFAULT_BANNER_DISTANCE_ORIGIN_POINT_LENGTH
 
     /**
      * 边角横幅宽度
      */
     private var bannerWidth = DEFAULT_BANNER_WIDTH
 
+    /**
+     * 横幅文字颜色
+     */
+    private var bannerTextColor = DEFAULT_BANNER_TEXT_COLOR
+
+    /**
+     * 横幅文字大小
+     */
+    private var bannerTextSize = DEFAULT_BANNER_TEXT_SIZE
+
     init {
         initAttrs(attrs)
 
-        cornerBannerPaint.apply {
+        bannerPaint.apply {
             color = bannerBackgroundColor
             style = Paint.Style.FILL
+        }
+
+        bannerTextPaint.apply {
+            color = bannerTextColor
+            textSize = bannerTextSize.toFloat()
+            style = Paint.Style.FILL
+            textAlign = Paint.Align.LEFT
         }
 
         setWillNotDraw(false)
@@ -69,25 +108,63 @@ class CornerLayout @JvmOverloads constructor(
     override fun onDrawForeground(canvas: Canvas) {
         super.onDrawForeground(canvas)
         drawBanner(canvas)
+        drawText(canvas)
     }
 
+    /**
+     * 绘制横幅
+     */
     private fun drawBanner(canvas: Canvas) {
-        val bannerRightWithPercent = (viewWidth * bannerPercent)
-        val bannerBottomWithPercent = (viewHeight * bannerPercent)
+        val x1Point = arrayOf(bannerDistanceOriginPointLength - bannerWidth, 0F)
+        val x2Point = arrayOf(bannerDistanceOriginPointLength, 0F)
+        val y1Point = arrayOf(0F, bannerDistanceOriginPointLength - bannerWidth)
+        val y2Point = arrayOf(0F, bannerDistanceOriginPointLength)
 
-        val x1Point = arrayOf(bannerRightWithPercent - bannerWidth, 0F)
-        val x2Point = arrayOf(bannerRightWithPercent, 0F)
-        val y1Point = arrayOf(0F, bannerBottomWithPercent - bannerWidth)
-        val y2Point = arrayOf(0F, bannerBottomWithPercent)
-
-        cornerBannerPath.apply {
+        bannerPath.apply {
             reset()
-            moveTo(x1Point[0],x1Point[1])
-            lineTo(y1Point[0],y1Point[1])
-            lineTo(y2Point[0],y2Point[1])
-            lineTo(x2Point[0],x2Point[1])
+            moveTo(y1Point[0], y1Point[1])
+            lineTo(x1Point[0], x1Point[1])
+            lineTo(x2Point[0], x2Point[1])
+            lineTo(y2Point[0], y2Point[1])
         }
-        canvas.drawPath(cornerBannerPath, cornerBannerPaint)
+        canvas.drawPath(bannerPath, bannerPaint)
+    }
+
+    /**
+     * 绘制横幅上的文字
+     */
+    private fun drawText(canvas: Canvas) {
+        // 测量欲绘制文字宽度
+        val bannerTextWidth = bannerTextPaint.measureText(realDrawBannerText)
+        // 计算banner最短边长度
+        val bannerShortestLength =
+            (sqrt(
+                2 * (bannerDistanceOriginPointLength - bannerWidth).toDouble().pow(2)
+            )).toFloat()
+        if (bannerTextWidth > bannerShortestLength) {
+            // 如果最短边长度小于欲绘制文字长度,则对欲绘制文字剪裁,直到欲绘制文字比最短边长度小方可绘制文字
+            realDrawBannerText = realDrawBannerText.substring(0, realDrawBannerText.length - 1)
+            drawText(canvas)
+            return
+        }
+        // a^2 + b^2 = c^2
+        val hOffset = bannerShortestLength / 2 - bannerTextWidth / 2
+        // 计算banner最长边长度
+        val bannerLongestLength =
+            (sqrt(2 * (bannerDistanceOriginPointLength).toDouble().pow(2))).toFloat()
+        // 单个直角边长度
+        val oneOfTheRightAngleLength = (bannerLongestLength - bannerShortestLength) / 2
+        // 计算banner的高度
+        val bannerHeight =
+            sqrt(bannerWidth.toDouble().pow(2) - oneOfTheRightAngleLength.pow(2)).toFloat()
+
+        val fontMetrics = bannerTextPaint.fontMetrics
+        // 计算baseLine偏移量
+        val baseLineOffset = (fontMetrics.top + fontMetrics.bottom) / 2
+        val vOffset = bannerHeight / 2 - baseLineOffset
+
+        canvas.drawTextOnPath(realDrawBannerText, bannerPath, hOffset, vOffset, bannerTextPaint)
+
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -98,7 +175,9 @@ class CornerLayout @JvmOverloads constructor(
 
     companion object {
         private val DEFAULT_BANNER_BACKGROUND_COLOR = Color.parseColor("#FF8080")
-        private const val DEFAULT_BANNER_PERCENT = 0.4F
+        private val DEFAULT_BANNER_DISTANCE_ORIGIN_POINT_LENGTH = 60.dp.toFloat()
         private val DEFAULT_BANNER_WIDTH = 26.dp
+        private const val DEFAULT_BANNER_TEXT_COLOR = Color.WHITE
+        private val DEFAULT_BANNER_TEXT_SIZE = 12.sp
     }
 }
