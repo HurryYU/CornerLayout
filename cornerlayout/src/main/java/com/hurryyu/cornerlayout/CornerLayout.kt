@@ -39,8 +39,7 @@ class CornerLayout @JvmOverloads constructor(
 
     private var viewHeight = 0
 
-    // TODO: 2020/9/1 demo str final will delete
-    var bannerText = "HurryYu007"
+    var bannerText = ""
         set(value) {
             field = value
             realDrawBannerText = value
@@ -102,6 +101,22 @@ class CornerLayout @JvmOverloads constructor(
                 R.styleable.CornerLayout_bannerBackgroundColor,
                 DEFAULT_BANNER_BACKGROUND_COLOR
             )
+            bannerDistanceOriginPointLength = getDimensionPixelSize(
+                R.styleable.CornerLayout_bannerDistanceLength,
+                DEFAULT_BANNER_DISTANCE_ORIGIN_POINT_LENGTH
+            )
+            bannerWidth = getDimensionPixelSize(
+                R.styleable.CornerLayout_bannerWidth,
+                DEFAULT_BANNER_WIDTH
+            )
+            bannerTextColor = getColor(
+                R.styleable.CornerLayout_bannerTextColor,
+                DEFAULT_BANNER_TEXT_COLOR
+            )
+            bannerTextSize = getDimensionPixelSize(
+                R.styleable.CornerLayout_bannerTextSize,
+                DEFAULT_BANNER_TEXT_SIZE
+            )
         }
     }
 
@@ -115,10 +130,10 @@ class CornerLayout @JvmOverloads constructor(
      * 绘制横幅
      */
     private fun drawBanner(canvas: Canvas) {
-        val x1Point = arrayOf(bannerDistanceOriginPointLength - bannerWidth, 0F)
-        val x2Point = arrayOf(bannerDistanceOriginPointLength, 0F)
-        val y1Point = arrayOf(0F, bannerDistanceOriginPointLength - bannerWidth)
-        val y2Point = arrayOf(0F, bannerDistanceOriginPointLength)
+        val x1Point = arrayOf(bannerDistanceOriginPointLength - bannerWidth.toFloat(), 0F)
+        val x2Point = arrayOf(bannerDistanceOriginPointLength.toFloat(), 0F)
+        val y1Point = arrayOf(0F, bannerDistanceOriginPointLength - bannerWidth.toFloat())
+        val y2Point = arrayOf(0F, bannerDistanceOriginPointLength.toFloat())
 
         bannerPath.apply {
             reset()
@@ -175,7 +190,7 @@ class CornerLayout @JvmOverloads constructor(
 
     companion object {
         private val DEFAULT_BANNER_BACKGROUND_COLOR = Color.parseColor("#FF8080")
-        private val DEFAULT_BANNER_DISTANCE_ORIGIN_POINT_LENGTH = 60.dp.toFloat()
+        private val DEFAULT_BANNER_DISTANCE_ORIGIN_POINT_LENGTH = 60.dp
         private val DEFAULT_BANNER_WIDTH = 26.dp
         private const val DEFAULT_BANNER_TEXT_COLOR = Color.WHITE
         private val DEFAULT_BANNER_TEXT_SIZE = 12.sp

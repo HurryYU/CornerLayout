@@ -2,5 +2,9 @@
 <resources>
     <declare-styleable name="CornerLayout">
         <attr name="bannerBackgroundColor" format="color" />
+        <attr name="bannerDistanceLength" format="dimension" />
+        <attr name="bannerWidth" format="dimension" />
+        <attr name="bannerTextColor" format="color" />
+        <attr name="bannerTextSize" format="dimension" />
     </declare-styleable>
 </resources>
