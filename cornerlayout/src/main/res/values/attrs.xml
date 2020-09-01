@@ -6,5 +6,6 @@
         <attr name="bannerWidth" format="dimension" />
         <attr name="bannerTextColor" format="color" />
         <attr name="bannerTextSize" format="dimension" />
+        <attr name="bannerText" format="string" />
     </declare-styleable>
 </resources>

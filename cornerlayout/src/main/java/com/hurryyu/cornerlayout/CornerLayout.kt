@@ -117,6 +117,7 @@ class CornerLayout @JvmOverloads constructor(
                 R.styleable.CornerLayout_bannerTextSize,
                 DEFAULT_BANNER_TEXT_SIZE
             )
+            bannerText = getString(R.styleable.CornerLayout_bannerText) ?: ""
         }
     }
 
