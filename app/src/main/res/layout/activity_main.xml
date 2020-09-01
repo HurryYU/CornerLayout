@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         app:bannerBackgroundColor="@color/colorPrimary"
         app:bannerDistanceLength="75dp"
+        app:bannerText="HurryYu"
         app:bannerTextColor="#FFFFFF"
         app:bannerTextSize="14sp"
         app:bannerWidth="34dp">
@@ -20,10 +21,12 @@
         <TextView
             android:layout_width="180dp"
             android:layout_height="150dp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/shape_card"
             android:gravity="center"
             android:text="小熊"
-            android:textSize="18sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold" />
     </com.hurryyu.cornerlayout.CornerLayout>
 
 </LinearLayout>
