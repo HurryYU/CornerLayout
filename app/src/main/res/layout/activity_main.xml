@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -13,17 +14,17 @@
         android:layout_height="wrap_content"
         app:bannerBackgroundColor="@color/colorPrimary"
         app:bannerDistanceLength="75dp"
-        app:bannerText="HurryYu"
+        app:bannerText="限时6折"
         app:bannerTextColor="#FFFFFF"
         app:bannerTextSize="14sp"
         app:bannerWidth="34dp">
 
         <TextView
             android:layout_width="180dp"
-            android:layout_height="150dp"
-            android:background="@drawable/shape_card"
+            android:layout_height="130dp"
+            android:background="@drawable/shape_book_card"
             android:gravity="center"
-            android:text="小熊"
+            android:text="安徒生童话"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold" />
