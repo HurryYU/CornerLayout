@@ -53,27 +53,27 @@ class CornerLayout @JvmOverloads constructor(
     /**
      * 边角横幅背景颜色
      */
-    private var bannerBackgroundColor = DEFAULT_BANNER_BACKGROUND_COLOR
+    var bannerBackgroundColor = DEFAULT_BANNER_BACKGROUND_COLOR
 
     /**
      * 最远点距离View(0,0)点距离
      */
-    private var bannerDistanceOriginPointLength = DEFAULT_BANNER_DISTANCE_ORIGIN_POINT_LENGTH
+    var bannerDistanceOriginPointLength = DEFAULT_BANNER_DISTANCE_ORIGIN_POINT_LENGTH
 
     /**
      * 边角横幅宽度
      */
-    private var bannerWidth = DEFAULT_BANNER_WIDTH
+    var bannerWidth = DEFAULT_BANNER_WIDTH
 
     /**
      * 横幅文字颜色
      */
-    private var bannerTextColor = DEFAULT_BANNER_TEXT_COLOR
+    var bannerTextColor = DEFAULT_BANNER_TEXT_COLOR
 
     /**
      * 横幅文字大小
      */
-    private var bannerTextSize = DEFAULT_BANNER_TEXT_SIZE
+    var bannerTextSize = DEFAULT_BANNER_TEXT_SIZE
 
     init {
         initAttrs(attrs)
