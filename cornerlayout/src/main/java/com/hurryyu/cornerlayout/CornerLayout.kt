@@ -51,7 +51,7 @@ class CornerLayout @JvmOverloads constructor(
     private var realDrawBannerText = bannerText
 
     /**
-     * 边角横幅背景颜色
+     * 横幅背景颜色
      */
     var bannerBackgroundColor = DEFAULT_BANNER_BACKGROUND_COLOR
 
@@ -61,7 +61,7 @@ class CornerLayout @JvmOverloads constructor(
     var bannerDistanceOriginPointLength = DEFAULT_BANNER_DISTANCE_ORIGIN_POINT_LENGTH
 
     /**
-     * 边角横幅宽度
+     * 横幅宽度
      */
     var bannerWidth = DEFAULT_BANNER_WIDTH
 
