@@ -6,7 +6,9 @@
 
 ## 一、引入
 
-TODO
+```groovy
+implementation 'com.hurryyu:cornerlayout:1.0'
+```
 
 ## 二、使用
 
