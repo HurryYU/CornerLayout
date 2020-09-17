@@ -163,7 +163,7 @@ class CornerLayout @JvmOverloads constructor(
             drawText(canvas)
             return
         }
-        // a^2 + b^2 = c^2
+        
         val hOffset = bannerShortestLength / 2 - bannerTextWidth / 2
         // 计算banner最长边长度
         val bannerLongestLength =
