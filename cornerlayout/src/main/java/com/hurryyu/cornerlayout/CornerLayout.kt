@@ -39,6 +39,9 @@ class CornerLayout @JvmOverloads constructor(
 
     private var viewHeight = 0
 
+    /**
+     * 用户设置的欲绘制文本内容
+     */
     var bannerText = ""
         set(value) {
             field = value
