@@ -7,7 +7,7 @@
 ## 一、引入
 
 ```groovy
-implementation 'com.hurryyu:cornerlayout:1.0'
+implementation 'com.hurryyu:cornerlayout:1.1'
 ```
 
 ## 二、使用
@@ -52,16 +52,18 @@ implementation 'com.hurryyu:cornerlayout:1.0'
 
 其中您可以自行修改的属性如下：
 
-|        属性名         |                        作用                        |
-| :-------------------: | :------------------------------------------------: |
-| bannerBackgroundColor |                 设置横幅的背景颜色                 |
-| bannerDistanceLength  | 设置横幅在View的长度和宽度上的最远距离(见下图解释) |
-|      bannerWidth      |             设置横幅的宽度(见下图解释)             |
-|    bannerTextColor    |                  横幅上文字的颜色                  |
-|    bannerTextSize     |                  横幅上文字的大小                  |
-|      bannerText       |                  横幅上的文字内容                  |
+|        属性名         |                             作用                             |
+| :-------------------: | :----------------------------------------------------------: |
+| bannerBackgroundColor |                      设置横幅的背景颜色                      |
+| bannerDistanceLength  |      设置横幅在View的长度和宽度上的最远距离(见下图解释)      |
+|      bannerWidth      |                  设置横幅的宽度(见下图解释)                  |
+|    bannerTextColor    |                       横幅上文字的颜色                       |
+|    bannerTextSize     |                       横幅上文字的大小                       |
+|      bannerText       |                       横幅上的文字内容                       |
+|        display        |                         是否显示横幅                         |
+|    bannerPosition     | 横幅显示的位置(BannerPosition.TOP_LEFT,BannerPosition.TOP_RIGHT,BannerPosition.BOTTOM_LEFT,BannerPosition.BOTTOM_RIGHT) |
 
-下面对两个比较难理解的属性做出解释：
+下面对几个比较难理解的属性做出解释：
 
 - bannerDistanceLength（设置横幅在View的长度和宽度上的最远距离）
 
@@ -70,6 +72,29 @@ implementation 'com.hurryyu:cornerlayout:1.0'
 - bannerWidth（设置横幅的宽度）
 
   ![](./assets/image-20200904144148587.png)
+
+- display（是否显示横幅）
+
+  默认值为true，您可以在代码中动态修改这个值，达到显示或隐藏横幅的效果：
+
+  ```kotlin
+  # 隐藏横幅
+  cornerLayout.display = false
+  ```
+
+- bannerPosition（横幅显示的位置）
+
+  默认情况下，横幅是显示在左上角的，你可以通过修改这个属性的值，来改变横幅显示的位置。当前一共支持4个值：
+
+  1. BannerPosition.TOP_LEFT：左上角
+  2. BannerPosition.TOP_RIGHT：右上角
+  3. BannerPosition.BOTTOM_LEFT：左下角
+  4. BannerPosition.BOTTOM_RIGHT：右下角
+
+  ```kotlin
+  # 让横幅显示在右下角
+  cornerLayout.bannerPosition = BannerPosition.BOTTOM_RIGHT
+  ```
 
 ## 三、实现过程
 
