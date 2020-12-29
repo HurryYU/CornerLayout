@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <com.hurryyu.cornerlayout.CornerLayout
@@ -17,7 +17,12 @@
         app:bannerText="限时6折"
         app:bannerTextColor="#FFFFFF"
         app:bannerTextSize="14sp"
-        app:bannerWidth="34dp">
+        app:bannerWidth="34dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3">
 
         <TextView
             android:layout_width="180dp"
@@ -30,4 +35,54 @@
             android:textStyle="bold" />
     </com.hurryyu.cornerlayout.CornerLayout>
 
-</LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTopLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="左上"
+        app:layout_constraintEnd_toStartOf="@id/btnTopRight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cornerLayout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTopRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="右上"
+        app:layout_constraintBottom_toBottomOf="@id/btnTopLeft"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnTopLeft"
+        app:layout_constraintTop_toTopOf="@id/btnTopLeft" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBottomLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="左下"
+        app:layout_constraintEnd_toStartOf="@id/btnBottomRight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnTopLeft" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBottomRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="右下"
+        app:layout_constraintBottom_toBottomOf="@id/btnBottomLeft"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnBottomLeft"
+        app:layout_constraintTop_toTopOf="@id/btnBottomLeft" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnShowOrHide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="显示/隐藏"
+        app:layout_constraintBottom_toTopOf="@id/btnBottomLeft"
+        app:layout_constraintEnd_toEndOf="@id/btnTopRight"
+        app:layout_constraintStart_toStartOf="@id/btnTopLeft"
+        app:layout_constraintTop_toBottomOf="@id/btnTopLeft" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
