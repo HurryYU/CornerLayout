@@ -32,6 +32,7 @@ implementation 'com.hurryyu:cornerlayout:1.1'
         app:bannerBackgroundColor="@color/colorPrimary"
         app:bannerDistanceLength="75dp"
         app:bannerText="限时6折"
+        app:direction="TOP_RIGHT"
         app:bannerTextColor="#FFFFFF"
         app:bannerTextSize="14sp"
         app:bannerWidth="34dp">
@@ -61,7 +62,7 @@ implementation 'com.hurryyu:cornerlayout:1.1'
 |    bannerTextSize     |                       横幅上文字的大小                       |
 |      bannerText       |                       横幅上的文字内容                       |
 |        display        |                         是否显示横幅                         |
-|    bannerPosition     | 横幅显示的位置(BannerPosition.TOP_LEFT,BannerPosition.TOP_RIGHT,BannerPosition.BOTTOM_LEFT,BannerPosition.BOTTOM_RIGHT) |
+|       direction       | 横幅显示的位置(TOP_LEFT , TOP_RIGHT , BOTTOM_LEFT , BOTTOM_RIGHT) |
 
 下面对几个比较难理解的属性做出解释：
 
@@ -82,18 +83,18 @@ implementation 'com.hurryyu:cornerlayout:1.1'
   cornerLayout.display = false
   ```
 
-- bannerPosition（横幅显示的位置）
+- direction（横幅显示的位置）
 
   默认情况下，横幅是显示在左上角的，你可以通过修改这个属性的值，来改变横幅显示的位置。当前一共支持4个值：
 
-  1. BannerPosition.TOP_LEFT：左上角
-  2. BannerPosition.TOP_RIGHT：右上角
-  3. BannerPosition.BOTTOM_LEFT：左下角
-  4. BannerPosition.BOTTOM_RIGHT：右下角
+  1. TOP_LEFT：左上角
+  2. TOP_RIGHT：右上角
+  3. BOTTOM_LEFT：左下角
+  4. BOTTOM_RIGHT：右下角
 
   ```kotlin
-  # 让横幅显示在右下角
-  cornerLayout.bannerPosition = BannerPosition.BOTTOM_RIGHT
+  # 让横幅显示在右下角(使用代码而非xml)
+  cornerLayout.bannerPosition(BannerPosition.BOTTOM_RIGHT)
   ```
 
 ## 三、实现过程
