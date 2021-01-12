@@ -6,9 +6,9 @@ package com.hurryyu.cornerlayout
  * https://github.com/HurryYu
  * 2020-12-21
  */
-enum class BannerPosition {
-    TOP_LEFT,
-    TOP_RIGHT,
-    BOTTOM_LEFT,
-    BOTTOM_RIGHT
+enum class BannerPosition(val value: Int) {
+    TOP_LEFT(1),
+    TOP_RIGHT(2),
+    BOTTOM_LEFT(3),
+    BOTTOM_RIGHT(4)
 }

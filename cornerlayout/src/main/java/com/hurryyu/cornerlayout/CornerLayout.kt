@@ -90,7 +90,7 @@ class CornerLayout @JvmOverloads constructor(
     /**
      * 横幅显示的位置:左上右下
      */
-    var bannerPosition = BannerPosition.TOP_LEFT
+    private var bannerPosition = BannerPosition.TOP_LEFT.value
         set(value) {
             field = value
             invalidate()
@@ -143,6 +143,8 @@ class CornerLayout @JvmOverloads constructor(
                 DEFAULT_BANNER_TEXT_SIZE
             )
             bannerText = getString(R.styleable.CornerLayout_bannerText) ?: ""
+            bannerPosition =
+                getInt(R.styleable.CornerLayout_direction, BannerPosition.TOP_LEFT.value)
         }
     }
 
@@ -173,16 +175,20 @@ class CornerLayout @JvmOverloads constructor(
         canvas.drawPath(bannerPath, bannerPaint)
     }
 
+    fun bannerPosition(value: BannerPosition) {
+        bannerPosition = value.value
+    }
+
     private fun generatorPointByPosition(): List<Point> {
         pointList.clear()
         when (bannerPosition) {
-            BannerPosition.TOP_LEFT -> {
+            BannerPosition.TOP_LEFT.value -> {
                 pointList.add(Point(0F, bannerDistanceOriginPointLength - bannerWidth.toFloat()))
                 pointList.add(Point(bannerDistanceOriginPointLength - bannerWidth.toFloat(), 0F))
                 pointList.add(Point(bannerDistanceOriginPointLength.toFloat(), 0F))
                 pointList.add(Point(0F, bannerDistanceOriginPointLength.toFloat()))
             }
-            BannerPosition.TOP_RIGHT -> {
+            BannerPosition.TOP_RIGHT.value -> {
                 pointList.add(
                     Point(
                         viewWidth - (bannerDistanceOriginPointLength - bannerWidth).toFloat(),
@@ -198,7 +204,7 @@ class CornerLayout @JvmOverloads constructor(
                 pointList.add(Point(viewWidth.toFloat(), bannerDistanceOriginPointLength.toFloat()))
                 pointList.add(Point(viewWidth.toFloat() - bannerDistanceOriginPointLength, 0F))
             }
-            BannerPosition.BOTTOM_LEFT -> {
+            BannerPosition.BOTTOM_LEFT.value -> {
                 pointList.add(Point(0F, viewHeight - bannerDistanceOriginPointLength.toFloat()))
                 pointList.add(
                     Point(
@@ -219,7 +225,7 @@ class CornerLayout @JvmOverloads constructor(
                     )
                 )
             }
-            BannerPosition.BOTTOM_RIGHT -> {
+            BannerPosition.BOTTOM_RIGHT.value -> {
                 pointList.add(
                     Point(
                         viewWidth - bannerDistanceOriginPointLength.toFloat(),
@@ -273,7 +279,9 @@ class CornerLayout @JvmOverloads constructor(
             (sqrt(2 * (bannerDistanceOriginPointLength).toDouble().pow(2))).toFloat()
 
         val hOffset =
-            if (bannerPosition == BannerPosition.BOTTOM_LEFT || bannerPosition == BannerPosition.BOTTOM_RIGHT) {
+            if (bannerPosition == BannerPosition.BOTTOM_LEFT.value ||
+                bannerPosition == BannerPosition.BOTTOM_RIGHT.value
+            ) {
                 bannerLongestLength / 2 - bannerTextWidth / 2
             } else {
                 bannerShortestLength / 2 - bannerTextWidth / 2
