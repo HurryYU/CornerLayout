@@ -18,6 +18,7 @@
         app:bannerTextColor="#FFFFFF"
         app:bannerTextSize="14sp"
         app:bannerWidth="34dp"
+        app:direction="TOP_RIGHT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

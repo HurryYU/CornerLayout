@@ -16,16 +16,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.cornerLayout.bannerText = "HurryYu"
         binding.btnTopLeft.setOnClickListener {
-            binding.cornerLayout.bannerPosition = BannerPosition.TOP_LEFT
+            binding.cornerLayout.bannerPosition(BannerPosition.TOP_LEFT)
         }
         binding.btnTopRight.setOnClickListener {
-            binding.cornerLayout.bannerPosition = BannerPosition.TOP_RIGHT
+            binding.cornerLayout.bannerPosition(BannerPosition.TOP_RIGHT)
         }
         binding.btnBottomLeft.setOnClickListener {
-            binding.cornerLayout.bannerPosition = BannerPosition.BOTTOM_LEFT
+            binding.cornerLayout.bannerPosition(BannerPosition.BOTTOM_LEFT)
         }
         binding.btnBottomRight.setOnClickListener {
-            binding.cornerLayout.bannerPosition = BannerPosition.BOTTOM_RIGHT
+            binding.cornerLayout.bannerPosition(BannerPosition.BOTTOM_RIGHT)
         }
         binding.btnShowOrHide.setOnClickListener {
             binding.cornerLayout.display = !binding.cornerLayout.display
