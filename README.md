@@ -7,7 +7,7 @@
 ## 一、引入
 
 ```groovy
-implementation 'com.hurryyu:cornerlayout:1.1'
+implementation 'com.hurryyu:cornerlayout:1.2'
 ```
 
 ## 二、使用
