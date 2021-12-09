@@ -6,8 +6,25 @@
 
 ## 一、引入
 
+本库已上传至`MavenCentral`，在引用前，请确保您项目根目录中的`build.gradle`中已经添加了`mavenCentral()`：
+
 ```groovy
-implementation 'com.hurryyu:cornerlayout:1.2'
+buildscript {
+    repositories {
+        ...
+        mavenCentral()
+    }
+    ...
+}
+...
+```
+
+通常，它是默认就存在的，如无异常，您无需关心。
+
+接下来，依赖本库：
+
+```groovy
+implementation 'com.hurryyu.android:cornerlayout:1.2'
 ```
 
 ## 二、使用
