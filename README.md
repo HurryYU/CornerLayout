@@ -6,20 +6,7 @@
 
 ## 一、引入
 
-本库已上传至`MavenCentral`，在引用前，请确保您项目根目录中的`build.gradle`中已经添加了`mavenCentral()`：
-
-```groovy
-buildscript {
-    repositories {
-        ...
-        mavenCentral()
-    }
-    ...
-}
-...
-```
-
-通常，它是默认就存在的，如无异常，您无需关心。
+本库已上传至`MavenCentral`，在引用前，请确保您项目已添加支持`mavenCentral()`。通常，它是默认就支持的，如无异常，您无需关心。
 
 接下来，依赖本库：
 
